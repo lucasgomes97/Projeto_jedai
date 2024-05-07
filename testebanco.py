@@ -4,8 +4,8 @@ import pyodbc
 
 # Defina sua conexão com o banco de dados
 def create_connection():
-    server = r'DESKTOP-LUCAS\SQLSERVER2022'  # Substitua pelo seu servidor SQL
-    database = 'PythonSQL'
+    server = r'seu_server'  # Substitua pelo seu servidor SQL
+    database = 'seu_banco'
     conn = pyodbc.connect(f'DRIVER={{SQL Server}};SERVER={server};DATABASE={database};')
     return conn
 
