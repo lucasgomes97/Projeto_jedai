@@ -3,11 +3,11 @@ import requests
 
 
 # Configuração da API do OpenAI - substitua 'your-api-key' pelo seu próprio
-api_key = 'sk-proj-yyso50FaUJqXVQwpWeuuT3BlbkFJDywrdCOMRKs7X96RPsc4'
+api_key = 'sua chave da Openai aqui'
 
 def create_connection():
-    server = r'DESKTOP-LUCAS\SQLSERVER2022'  # Substitua pelo seu servidor SQL
-    database = 'PythonSQL'
+    server = r'seu server'  # Substitua pelo seu servidor SQL
+    database = 'seu banco de dados'
     conn = pyodbc.connect(f'DRIVER={{SQL Server}};SERVER={server};DATABASE={database};')
     return conn
 
@@ -57,32 +57,8 @@ def add_question_to_database(conn, id_questao, question_text, options_text, corr
 
 
 
-# def generate_questions():
-#     prompt = "Gerar uma questão de geografia em português pt-br com alternativas de A a D e explicacao da resposta. \nExplain:"
-#     data = {
-#         "prompt": prompt,
-#         "temperature": 0.7,
-#         "max_tokens": 500,
-#         "stop": ["###"],  # Indica o fim da geração da questão
-#         "model": "gpt-3.5-turbo-instruct"
-#     }
-#     headers = {
-#         "Content-Type": "application/json",
-#         "Authorization": f"Bearer {api_key}"
-#     }
-#     response = requests.post("https://api.openai.com/v1/completions", json=data, headers=headers)
-#     if response.status_code == 200:
-#         generated_questions = response.json().get('choices', [])
-#         if generated_questions:
-#             return [question['text'].strip() for question in generated_questions]
-#         else:
-#             print("Nenhuma questão gerada pela API.")
-#             return []  # Retorna uma lista vazia se não houver questões geradas
-#     else:
-#         print("Erro ao gerar questões usando a API da OpenAI:", response.text)
-#         return []
 def generate_questions():
-    prompt = "Gerar uma questão de geografia em português pt-br com alternativas de A a D e explicacao da resposta. \nExplain:"
+    prompt = "Gerar uma questão de geografia em português pt-br com alternativas de A a D e explicacao da resposta. \nExplain:" #aqui vc coloca a pergunta que deseja fazer para o chat gpt.
     data = {
         "prompt": prompt,
         "temperature": 0.7,
@@ -121,46 +97,7 @@ def generate_questions():
         return []
 
 
-# def main():
-#     conn = create_connection()
-#     try:
-#         last_id = fetch_max_question_id(conn)
-#         id_questao = last_id + 1  # Começa a partir do próximo ID após o último no banco
-#         questions = generate_questions()
-#         if questions:
-#             for question in questions:
-#                 try:
-#                     question_parts = question.split('\n\n')
-#                     question_text = question_parts[0].split('?')[0] + "?"
-#                     options_text = question_parts[1]
-#                     correct_answer = 'A'  # Alterando para 'A' como padrão
-#                     explanation = "Não foi possível encontrar a explicação."  # Define como padrão
-#                     explanation_index = question.find("Explicação:")
-#                     if explanation_index != -1:
-#                         explanation = question[explanation_index + len("Explicação:"):].strip()
-#
-#                     if not question_exists(conn, question_text):
-#                         print("Question Text:", question_text)
-#                         print("Options Text:", options_text)
-#                         print("Correct Answer:", correct_answer)
-#                         print("Explanation:", explanation)
-#                         print("Inserindo no banco de dados...")
-#                         add_question_to_database(conn, id_questao, question_text, options_text, correct_answer, explanation)
-#                         print("Pergunta inserida no banco de dados com sucesso.")
-#                         id_questao += 1
-#                     else:
-#                         print("Questão já existe no banco de dados, pulando...")
-#                 except IndexError:
-#                     print("Erro: Formato de pergunta inválido ou opções ausentes.")
-#                 except Exception as e:
-#                     print(f"Erro ao processar a questão: {e}")
-#     except Exception as e:
-#         print(f"Erro: {e}")
-#     finally:
-#         conn.close()
-#
-# if __name__ == "__main__":
-#     main()
+
 def main():
     conn = create_connection()
     try:
