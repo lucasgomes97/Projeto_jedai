@@ -1,8 +1,6 @@
 # Projeto_jedai
 
 
-# Formulário de Controle de saída de produtos
-
 Olá e bem-vindo ao meu portfólio!
 
 # Documentação para o Código de Geração de Questões e Prova de Geografia
